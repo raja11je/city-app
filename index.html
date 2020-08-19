@@ -16,7 +16,8 @@
         <div class="main2">rank</div>
 
         <div class="main1">
-            <div class="a b"></div>
+            <div class="a b">
+            </div>
             <div class="a c"></div>
             <div class="a d"></div>
             <div class="a e"></div>
@@ -40,14 +41,18 @@ const city=[]
 const promic=fetch(datacom)
 .then(blob=>blob.json())
 .then(data=>city.push(...data))
-.then(data=>showdata(data))
-console.log(city)
+.then(data=>showdata(city))
+
 
 function showdata(q){
     
 console.log(q);
-b.innerHTML=`${city}`
-// console.log(q)
+for(i=0;i<1000;i++){
+    console.log(i, "i");
+b.innerHTML+=`<p>${q[i].city}</p>`
+c.innerHTML+=`<p>${q[i].growth_from_2000_to_2013}</p>`
+d.innerHTML+=`<p>${q[i].latitude}</p>`
+}
 }
 
 

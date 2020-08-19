@@ -35,3 +35,7 @@
     width: 16.66%;
     border: 2px solid gold;
 }
+p{
+line-height: 30px;   
+text-align: center; 
+}
