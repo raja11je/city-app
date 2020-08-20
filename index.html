@@ -8,6 +8,13 @@
 </head>
 <body>
     <div class="main">
+        <div class="head">
+            <ul>
+                <li>city app</li>
+                <li><input type="text" placeholder="search" class="search"></li>
+            </ul>
+
+        </div>
         <div class="main2">city</div>
         <div class="main2">growth from 2000 to 2013</div>
         <div class="main2">latitude</div>
@@ -28,6 +35,20 @@
     
 </body>
 <script>
+    window.addEventListener("scroll",sd)
+
+function sd(){
+    if(
+        document.body.scrollTop>80||document.documentElement.scrollTop>80){
+        document.getElementsByClassName("head")[0].style.background="red";
+    // document.getElementsByClassName("head")[0].style.background="red";
+
+    }
+    else{
+        document.getElementsByClassName("head")[0].style.background="white";
+
+    }
+}
     let b=document.querySelector(".b")
     let c=document.querySelector(".c")
     let d=document.querySelector(".d")
@@ -43,17 +64,128 @@ const promic=fetch(datacom)
 .then(data=>city.push(...data))
 .then(data=>showdata(city))
 
-
+let i=0
+let q=0
 function showdata(q){
     
 console.log(q);
+// get()
 for(i=0;i<1000;i++){
-    console.log(i, "i");
+    
+    // console.log(i, "i");
 b.innerHTML+=`<p>${q[i].city}</p>`
 c.innerHTML+=`<p>${q[i].growth_from_2000_to_2013}</p>`
 d.innerHTML+=`<p>${q[i].latitude}</p>`
+e.innerHTML+=`<p>${q[i].longitude}</p>`
+f.innerHTML+=`<p>${q[i].population}</p>`
+g.innerHTML+=`<p>${q[i].rank}</p>`
+// get(i)
+
 }
 }
+
+// input show
+
+function findmatch(wordtomatch,city){
+    return city.filter(place=>{
+        const regex=new RegExp (wordtomatch,'gi')
+        return place.city.match(regex)
+        
+        
+        // ||place.growth_from_2000_to_2013.match(regex)||place.latitude.match(regex)
+        // ||place.longitude.match(regex)||place.population.match(regex)||place.rank.match(regex)
+    })
+}
+// let ka=[i.city]
+// console.log(ka)
+
+
+
+function get(){
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${[i].city}&units=metric&appid=18a8417f208b073204292b5a59a93539`)
+    .then(blob1.blob1.json())
+    .then(data1=>console.log(data1))
+    // .then(data1=>showdown(data1))
+    console.log(data1)
+}
+
+function showdown(w){
+    console.log(w)
+    c.innerHTML+=`${w.main.temp}&deg;c`
+
+}
+
+// show whter
+
+
+
+function displaymatches(){
+    const input=this.value;
+    const res=findmatch(input,city)
+    // let show=""
+
+    // res.map(data=>{
+    //  return show+=`${data.city}`
+
+    // })
+
+
+    let list=""
+        list=res.map(data=>`
+        <li>${data.city}</li>
+        `)
+
+        const ul=document.getElementsByClassName('b')[0].innerHTML=list
+
+
+        let list1=""
+        list1=res.map(data=>`
+        <li>${data.growth_from_2000_to_2013}</li>
+        `)
+
+        const ul1=document.getElementsByClassName('c')[0].innerHTML=list1
+
+        let list2=""
+        list2=res.map(data=>`
+        <li>${data.latitude}</li>
+        `)
+
+        const ul2=document.getElementsByClassName('d')[0].innerHTML=list2
+
+
+        let list3=""
+        list3=res.map(data=>`
+        <li>${data.longitude}</li>
+        `)
+
+        const ul3=document.getElementsByClassName('e')[0].innerHTML=list3
+
+
+        let list4=""
+        list4=res.map(data=>`
+        <li>${data.population}</li>
+        `)
+
+        const ul4=document.getElementsByClassName('f')[0].innerHTML=list4
+
+
+        let list5=""
+        list5=res.map(data=>`
+        <li>${data.rank}</li>
+        `)
+
+        const ul5=document.getElementsByClassName('g')[0].innerHTML=list5
+
+
+    // b.innerHTML=`<p>${show}</p>`
+    // c.innerHTML=`${show}`
+}
+
+let search=document.querySelector(".search")
+search.addEventListener("keyup",displaymatches)
+
+
+// head
 
 
 
